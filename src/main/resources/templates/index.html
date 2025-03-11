@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/index.css">
+    <title>Users</title>
+</head>
+<body>
+    <div class="parent">
+        <div class="table">
+            <div class="row" id="header">
+                <div class="cell">ID</div>
+                <div class="cell">Name</div>
+                <div class="cell">LastName</div>
+                <div class="cell">Email</div>
+                <div class="cell">Role</div>
+                <div class="cell">Action</div>
+            </div>
+            <form class="row" action="/delete" method="post" th:each="user : ${users}">
+                <div class="cell" th:text="${user.getId()}"></div>
+                <div class="cell" th:text="${user.getName()}"></div>
+                <div class="cell" th:text="${user.getSurname()}"></div>
+                <div class="cell" th:text="${user.getEmail()}"></div>
+                <div class="cell" th:text="${user.getRole()}"></div>
+                <input type="hidden" name="id" th:value="${user.getId()}">
+                <input class="cell" type="submit" value="Delete">
+            </form>
+            <form class="row" action="/create" method="post">
+                <div class="cell">id</div>
+                <input class="cell" type="text" name="name" placeholder="name" required/>
+                <input class="cell" type="text" name="surname" placeholder="surname" required/>
+                <input class="cell" type="text" name="email" placeholder="email" required/>
+                <select class="cell" name="role" required>
+                    <option value="VISITOR">VISITOR</option>
+                    <option value="STUDENT">STUDENT</option>
+                    <option value="SUPPORT">SUPPORT</option>
+                    <option value="MENTOR">MENTOR</option>
+                    <option value="ADMIN">ADMIN</option>
+                </select>
+                <input class="cell" type="submit" value="Add user"/>
+            </form>
+            <form class="row" action="/update" method="post">
+                <input class="cell" type="text" name="id" placeholder="id" required/>
+                <input class="cell" type="text" name="name" placeholder="name"/>
+                <input class="cell" type="text" name="surname" placeholder="surname"/>
+                <input class="cell" type="text" name="email" placeholder="email"/>
+                <select class="cell" name="role" required>
+                    <option value="VISITOR">VISITOR</option>
+                    <option value="STUDENT">STUDENT</option>
+                    <option value="SUPPORT">SUPPORT</option>
+                    <option value="MENTOR">MENTOR</option>
+                    <option value="ADMIN">ADMIN</option>
+                </select>
+                <input class="cell" type="submit" value="Update user"/>
+            </form>
+            <form class="row" action="/" method="get">
+                <input class="cell" type="text" name="id" placeholder="id">
+                <input class="cell" type="submit" value="Find user">
+            </form>
+            <form class="row" action="/init" method="post">
+                <input class="cell" type="submit" value="Fill table"/>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
